@@ -57,7 +57,7 @@ def EGRNCycle(sup, xmif, ixmif):
                     number_row=kpt.point_number[ixkpt],
                     x=float(xkpt),
                     y=float(kpt.y[ixkpt]),
-                    error_rate=float(kpt.error_rate[ixkpt]),
+                    error_rate=kpt.error_rate[ixkpt],
                     method_determining_point=kpt.method_determining_point[ixkpt],
                     source="ЕГРН"
                 )
