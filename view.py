@@ -1,6 +1,6 @@
 from flet import *
 from main import Main
-from UnploadingMif import UnploadingMif
+from UnploadingMif import UnpackingMif
 from UnploadingKPT import UnploadKPT
 from UnploadingGeodezia import UnploadingGeodezia
 from CreateMainData import StartPars
@@ -18,7 +18,7 @@ def viewsHendler(page):
     def Pars(e):
         if main_page.path_mif != "" and main_page.path_kpt != "" and main_page.path_geodez != "" and main_page.path_resul != "":
             page.go('/loding')
-            if UnploadingMif(pathDirectori=main_page.path_mif) == True: # MIF
+            if UnpackingMif(path_directory=main_page.path_mif) == True: # MIF
                 if UnploadKPT(path=main_page.path_kpt) == True:
                     if UnploadingGeodezia(path=main_page.geodez_path_text.value, _sheet= main_page.list_geodez.value): 
                         if StartPars(err=main_page.error_rate_text.value, met=main_page.method_of_determination_text.value) == True:
