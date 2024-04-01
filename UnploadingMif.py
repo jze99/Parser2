@@ -3,12 +3,25 @@ import re
 import numpy as np
 from Data import MifObject, NewMifCadObject
 
-def unpack_cad_number(cad_number_parts):
-    if '_' in cad_number_parts[0]:
-        cad_number = cad_number_parts[0].replace("_", ":")
-    else:
-        cad_number = ":".join(cad_number_parts[:4]).replace(".mif", "")
-    return cad_number
+def transform_data(item):
+    numbers = []
+    count = 0
+    for sub_item in item:
+        if count >= 4:
+            break
+        if isinstance(sub_item, str):
+            sub_item = sub_item.replace("(", "").replace(")", "").replace(",", "").replace(".", "").replace("_", ":").replace("mif", "")
+            if sub_item.isdigit():
+                numbers.append(sub_item)
+                count += 1
+            elif ":" in sub_item:
+                numbers.extend(sub_item.split(":"))
+                count += len(sub_item.split(":"))
+        elif isinstance(sub_item, int):
+            numbers.append(str(sub_item))
+            count += 1
+    result = ":".join(numbers)
+    return result
 
 def clear_list(lst):
     lst.clear()
@@ -20,7 +33,7 @@ def UnpackingMif(path_directory: str):
         for filename in os.scandir(path_directory):
             if filename.name.endswith(".mif"):
                 cad_number = filename.name.split(" ")
-                cad_number = unpack_cad_number(cad_number)
+                cad_number = transform_data(cad_number)
                 readMif(filename.path, x, y)
                 NewMifCadObject.append(MifObject(CadNumber=cad_number, x=x.copy(), y=y.copy(), square=Square(x, y)))
                 clear_list(x)
