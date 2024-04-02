@@ -230,10 +230,6 @@ class Main(UserControl):
             return
         value_path=e.files[0].path
         self.geodez_path_text.value = value_path
-        for result_list in ReturnList(path=value_path):
-            self.list_geodez.options.append(dropdown.Option(str(result_list)))
-        if self.list_geodez.options:
-            self.list_geodez.value = self.list_geodez.options[0].key
         self.list_geodez.update()
         self.path_geodez = value_path
         self.geodez_path_text.update()
