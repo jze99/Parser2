@@ -1,4 +1,4 @@
-from Data import NewGeodesyObject, NewKPTCadObject, NewMifCadObject, NewSuperObject, SuperObjet
+from Data import NewGeodesyObject, NewKPTCadObject, NewMifCadObject, NewSuperObject, SuperObjet, NewZuObject
 
 def ParsingMif():
     
@@ -121,14 +121,22 @@ def CycleSuper(err:str, met:str):
                             source=""
                         )
                 
-                    
-            
     return True
+
+
+def AddZu():
+    for zuObj in NewZuObject:
+        for sup in NewSuperObject:
+            if zuObj.zu == sup.CadNumber:
+                sup.AddOks(zuObj.oks)
+    return True
+    
 
 def StartPars(err:str, met:str):
     if ParsingMif() == True:
         if ParsingKPT() == True:
-            if CycleSuper(err=err, met=met) == True:
-                return True
+            if AddZu() == True:
+                if CycleSuper(err=err, met=met) == True:
+                    return True
             
     

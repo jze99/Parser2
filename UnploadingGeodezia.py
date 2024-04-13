@@ -20,9 +20,10 @@ def UnploadingGeodezia(path:str, _sheet:str):
     # Пропускаем первую строку
     next(rows)
     
+    NewGeodesyObject.clear()
+    
     for row in rows:
         if row[0] == None:
-            NewGeodesyObject.clear()
             workbook.close()
             return True
         NewGeodesyObject.append(

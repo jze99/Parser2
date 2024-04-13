@@ -73,6 +73,11 @@ class SuperObjet():
         self.method_determining_point = [] # метод определения точки
         self.source = [] # источник
         self.finaly_row = []
+        
+        self.oks=[]
+
+    def AddOks(self, oks:str):
+        self.oks.append(oks)
 
     def AddMif(self, CadNumber, x, y, square_mif):
         self.CadNumber = CadNumber # кадастровый номер
@@ -112,6 +117,13 @@ class SuperObjet():
             return round((float(self.square_mif)/float(self.square_kpt))*100-100, 2)
         else:
             return "данные отсутствуют"
+        
+        
+class ZuObject():
+    def __init__(self, zu, oks):
+        self.zu = zu
+        self.oks = oks
+    
 
 NewMifCadObject = []
 
@@ -119,4 +131,6 @@ NewKPTCadObject = []
 
 NewGeodesyObject = []
 
-NewSuperObject=[]
+NewSuperObject = []
+
+NewZuObject = []

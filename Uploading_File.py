@@ -29,6 +29,13 @@ def UploadingFile(path:str, _sheet:str):
     for sup in NewSuperObject:
         sheet.cell(row=row, column=1).value = sup.CadNumber
         sheet.cell(row=row, column=2).value = sup.type_of_object
+        if len(sup.oks)>0:
+            temp_zu = ", ".join(sup.oks)
+            sheet.cell(row=row, column=3).value = temp_zu
+        else:
+            sheet.cell(row=row, column=3).value ="не найдено"
+            
+        sheet.cell(row=row, column=4).value = "ОКС на ЗУ"
         row+=1
         sheet.cell(row=row, column=1).value = "Площадь и погрешность КПТ"
         sheet.cell(row=row, column=2).value = sup.square_kpt
