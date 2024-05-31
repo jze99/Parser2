@@ -64,6 +64,9 @@ def UploadingFile(path:str, _sheet:str):
                 sheet.cell(row=row, column=3).value = xsupkpt
                 sheet.cell(row=row, column=4).value = sup.y_kpt[ixsupkpt]
                 row+=1
+            sheet.cell(row=row, column=2).value = sup.point_number[0]
+            sheet.cell(row=row, column=3).value = sup.x_kpt[0]
+            sheet.cell(row=row, column=4).value = sup.y_kpt[0]
         else:
             sheet.cell(row=row, column=2).value = "данные отсутствуют"
             sheet.cell(row=row, column=3).value = "данные отсутствуют"            
