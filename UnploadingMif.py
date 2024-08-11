@@ -56,8 +56,18 @@ def readMif(path: str, x, y):
         for ch in t:
             ch = re.sub('[\n]', '', ch)
             ch = ch.split(" ")
-            y.append(round(float(ch[0]), 2))
-            x.append(round(float(ch[1]), 2))
+            if check_float(ch[0]) and check_float(ch[1]):   
+                y.append(round(float(ch[0]), 2))
+                x.append(round(float(ch[1]), 2))
+            else:
+                continue
 
 def Square(x, y):
     return round(0.5 * np.abs(np.dot(x, np.roll(y, 1)) - np.dot(y, np.roll(x, 1))), 0)
+
+def check_float(var):
+    try:
+        float(var)
+    except ValueError:
+        return False
+    return True
